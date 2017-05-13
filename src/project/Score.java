@@ -1,22 +1,16 @@
 package project;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.util.Observable;
 
-import javax.swing.JTextField;
-
-public class Score extends JTextField{
-	Font myFont = new Font("Tahoma", Font.BOLD + Font.ITALIC, 20);
-	Color myColor = new Color(255, 0, 0);
-	FontMetrics fm;
+public class Score extends Observable implements InterfaceScore {
 	int score;
 	boolean condition;
-	public Score(){
-		score =0;
+
+	public Score() {
+		score = 0;
+		condition = false;
 	}
-	
+
 	public int getScore() {
 		return score;
 	}
@@ -24,7 +18,7 @@ public class Score extends JTextField{
 	public void setScore(int score) {
 		this.score = score;
 	}
-
+	
 	public boolean isCondition() {
 		return condition;
 	}
@@ -33,27 +27,40 @@ public class Score extends JTextField{
 		this.condition = condition;
 	}
 
-	public void paint(Graphics g) {
-		super.paint(g);
-		g.setFont(myFont);
-		fm = g.getFontMetrics();
-		int hourXCoordinate = 20;
-		int minuteXCoordinate = hourXCoordinate + (fm.getMaxAdvance() * 2);
-		
-		g.setColor(myColor);
-		g.drawString("Score : ",hourXCoordinate, 20);
-		g.drawString(" "+score, minuteXCoordinate, 20);
+	public void changedScore() {
+		setChanged();
+		notifyObservers();
 	}
-	public void addScore(){
-		if(condition==true){
+	
+	public void setScoreChange(int score) {
+		this.score = score;
+		changedScore();
+	}
+
+	public void addScore() {
+		if (condition == true) {
 			score++;
-			repaint();
+			setChanged();
+			notifyObservers();
 		}
 	}
-	public void subScore(){
-		if(condition==true){
-			score-=2;
-			repaint();
+
+	public void subScore() {
+		if (condition == true) {
+			score -= 2;
+			setChanged();
+			notifyObservers();
 		}
+	}
+
+	public void calculateGrade() {
+		new Thread() {
+			public void run() {
+				addScore();
+				subScore();
+				setChanged();
+				notifyObservers();
+			};
+		}.start();
 	}
 }

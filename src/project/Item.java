@@ -1,6 +1,6 @@
 package project;
 
-public abstract class Item {
+public abstract class Item implements InterfaceItem{
 	protected int x;
 	protected int y;
 	protected int len;

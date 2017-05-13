@@ -1,6 +1,6 @@
 package project;
 
-public class Bar {
+public class Bar implements InterfaceBar{
 	private int x;
 	private int y;
 	private int len;
@@ -48,9 +48,9 @@ public class Bar {
 		return this.y - point.getY();
 	}
 
-	public boolean notTouch(int a, int b) {
-		return this.y == b && (a < this.x && a > this.x + 100);
-	}
+//	public boolean notTouch(int a, int b) {
+//		return this.y == b && (a < this.x && a > this.x + 100);
+//	}
 
 //	@Override
 //	public String toString() {

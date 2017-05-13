@@ -2,7 +2,7 @@ package project;
 
 import java.util.Observable;
 
-public class Clock extends Observable {
+public class Clock extends Observable implements InterfaceClock{
 	private int hour;
 	private int minute;
 	private int second;

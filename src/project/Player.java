@@ -3,9 +3,7 @@ package project;
 import java.awt.Color;
 import java.util.List;
 
-import javax.annotation.Generated;
-
-public abstract class Player implements Runnable {
+public abstract class Player implements Runnable,InterfacePlayer {
 	protected int x;
 	protected int y;
 	protected int duongKinh;
@@ -133,7 +131,7 @@ public abstract class Player implements Runnable {
 		if(tmp==bars.size()) // nay la gi em? da la neu ko co bar nao thoa OK
 		freeFalling = true;
 	}
-	public void freeFall(List<Bar> bars) {
+	public void freeFall(List<InterfaceBar> bars) {
 		/*
 		 * neu dang nhay thi khong roi.
 		 */
@@ -149,7 +147,7 @@ public abstract class Player implements Runnable {
 		Point tam = getTam();
 		//System.out.println(tam);
 		
-		for (Bar b : bars) {
+		for (InterfaceBar b : bars) {
 			if(b.isBelow(tam) && b.isBetween(tam)){
 //				System.out.print(b);
 //				System.out.print("  isBelow: " + b.isBelow(tam) + "; isBetween: " + b.isBetween(tam));

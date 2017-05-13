@@ -15,26 +15,28 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 	private Player player;
 	private Enemy enemy1;
 	private Enemy enemy2;
-	private Bar bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10;
+	private InterfaceBar bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10;
 	Item st2, st3, st4, armor;
 	Thread t;
 	int key;
-	TextFieldClock txtClock;
-	Score txtScore;
+	ViewClock txtClock;
+	ViewScore txtScore;
 	int score = 0;
 	Clock clock;
-	List<Bar> bars;
+	Score grade;
+	List<InterfaceBar> bars;
 
 	public BackgroundLevel1() {
 		setLayout(null);
 		clock = new Clock();
+		grade = new Score();
 		t = new Thread(this);
-		txtScore = new Score();
+		txtScore = new ViewScore(grade);
 		txtScore.setEditable(false);
 		txtScore.setBounds(0, 0, 140, 30);
 		add(txtScore);
 
-		txtClock = new TextFieldClock(clock, txtScore);
+		txtClock = new ViewClock(clock, grade);
 		txtClock.setEditable(false);
 		txtClock.setBounds(400, 0, 200, 30);
 		add(txtClock);
@@ -50,7 +52,7 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		bar8 = new Bar(200, 110, 100);
 		bar9 = new Bar(60, 70, 100);
 		bar10 = new Bar(0, 300, 800);
-		bars = new ArrayList<Bar>();
+		bars = new ArrayList<InterfaceBar>();
 		bars.add(bar1);
 		bars.add(bar2);
 		bars.add(bar3);
@@ -62,11 +64,11 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		bars.add(bar9);
 		bars.add(bar10);
 
-		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, txtScore, true);
-		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, txtScore, true);
-		st2 = new Star(20, 170, 25, player, txtScore);
-		st3 = new Star(280, 70, 25, player, txtScore);
-		st4 = new Star(470, 185, 25, player, txtScore);
+		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, true);
+		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, true);
+		st2 = new Star(20, 170, 25, player, grade);
+		st3 = new Star(280, 70, 25, player, grade);
+		st4 = new Star(470, 185, 25, player, grade);
 
 		armor = new Armor(400, 250, 30, player, (Star) st2);
 

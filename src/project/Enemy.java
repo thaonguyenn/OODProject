@@ -3,8 +3,6 @@ package project;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JOptionPane;
-
 public class Enemy extends Item implements Observer {
 	private int dx;
 	private int dy;
