@@ -13,21 +13,25 @@ import javax.swing.JLabel;
 
 public class BackgroundLevel1 extends JFrame implements Runnable {
 	private Player player;
-	private Enemy enemy1;
-	private Enemy enemy2;
+	private InterfaceItem enemy1, enemy2;
 	private InterfaceBar bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10;
-	Item st2, st3, st4, armor;
+	private InterfaceItem st2, st3, st4, armor;
+	private List<InterfaceBar> bars;
+	private List<InterfaceItem> listEnemies;
+	private List<InterfaceItem> listStars;
+	private ViewClock txtClock;
+	private ViewScore txtScore;
+	private Clock clock;
+	private Score grade;
+	private InterfaceControllerBackground controller;
 	Thread t;
 	int key;
-	ViewClock txtClock;
-	ViewScore txtScore;
 	int score = 0;
-	Clock clock;
-	Score grade;
-	List<InterfaceBar> bars;
 
 	public BackgroundLevel1() {
 		setLayout(null);
+		listEnemies = new ArrayList<InterfaceItem>();
+		listStars = new ArrayList<InterfaceItem>();
 		clock = new Clock();
 		grade = new Score();
 		t = new Thread(this);
@@ -64,14 +68,20 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		bars.add(bar9);
 		bars.add(bar10);
 
-		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, true);
-		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, true);
-		st2 = new Star(20, 170, 25, player, grade);
-		st3 = new Star(280, 70, 25, player, grade);
-		st4 = new Star(470, 185, 25, player, grade);
+		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, true,txtScore);
+		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, true,txtScore);
+		st2 = new Star(20, 170, 25, player, grade,txtScore);
+		st3 = new Star(280, 70, 25, player, grade,txtScore);
+		st4 = new Star(470, 185, 25, player, grade,txtScore);
 
-		armor = new Armor(400, 250, 30, player, (Star) st2);
+		armor = new Armor(400, 250, 30, player, (Star) st2,grade);
 
+		controller = (InterfaceControllerBackground) new ControllerBackgrond1(player,listEnemies, listStars, armor);
+		controller.addEnemy(enemy1);
+		controller.addEnemy(enemy2);
+		controller.addStar(st2);
+		controller.addStar(st3);
+		controller.addStar(st4);
 		JLabel lbl2 = new JLabel(new ImageIcon("image/b1.png"));
 		lbl2.setBounds(bar1.getX(), bar1.getY() - 90, bar1.getX() + bar1.getLen(), bar1.getY());
 		add(lbl2);
@@ -152,98 +162,17 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 				switch (key) {
 				case KeyEvent.VK_RIGHT:
 					player.moveRight();
-					if (enemy1.touch())
-						enemy1.performTouch();
-					if (enemy2.touch())
-						enemy2.performTouch();
-					if (st2.touch()) {
-						st2.performTouch();
-						st2.setX(900);
-						st2.setY(900);
-					}
-					if (st3.touch()) {
-						st3.performTouch();
-						st3.setX(900);
-						st3.setY(900);
-					}
-					if (st4.touch()) {
-						st4.performTouch();
-						st4.setX(900);
-						st4.setY(900);
-					}
-					if (armor.touch()) {
-						Player tmp = player;
-						player = new PlayerProtected(100, 240, 40, tmp);
-						armor.performTouch();
-						armor.setX(800);
-						armor.setY(800);
-						enemy1.setState(false);
-						enemy2.setState(false);
-					}
+					controller.checkAll();
 					repaint();
 					break;
 				case KeyEvent.VK_LEFT:
 					player.moveLeft();
-					if (enemy1.touch())
-						enemy1.performTouch();
-					if (enemy2.touch())
-						enemy2.performTouch();
-					if (st2.touch()) {
-						st2.performTouch();
-						st2.setX(900);
-						st2.setY(900);
-					}
-					if (st3.touch()) {
-						st3.performTouch();
-						st3.setX(900);
-						st3.setY(900);
-					}
-					if (st4.touch()) {
-						st4.performTouch();
-						st4.setX(900);
-						st4.setY(900);
-					}
-					if (armor.touch()) {
-						Player tmp = player;
-						player = new PlayerProtected(100, 240, 40, tmp);
-						armor.performTouch();
-						armor.setX(800);
-						armor.setY(800);
-						enemy1.setState(false);
-						enemy2.setState(false);
-					}
+					controller.checkAll();
 					repaint();
 					break;
 				case KeyEvent.VK_UP:
 					player.jump();
-					if (enemy1.touch())
-						enemy1.performTouch();
-					if (enemy2.touch())
-						enemy2.performTouch();
-					if (st2.touch()) {
-						st2.performTouch();
-						st2.setX(900);
-						st2.setY(900);
-					}
-					if (st3.touch()) {
-						st3.performTouch();
-						st3.setX(900);
-						st3.setY(900);
-					}
-					if (st4.touch()) {
-						st4.performTouch();
-						st4.setX(900);
-						st4.setY(900);
-					}
-					if (armor.touch()) {
-						Player tmp = player;
-						player = new PlayerProtected(100, 240, 40, tmp);
-						armor.performTouch();
-						armor.setX(800);
-						armor.setY(800);
-						enemy1.setState(false);
-						enemy2.setState(false);
-					}
+					controller.checkAll();
 					repaint();
 					break;
 				}

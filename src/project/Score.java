@@ -40,27 +40,24 @@ public class Score extends Observable implements InterfaceScore {
 	public void addScore() {
 		if (condition == true) {
 			score++;
-			setChanged();
-			notifyObservers();
+			changedScore();
 		}
 	}
 
 	public void subScore() {
 		if (condition == true) {
 			score -= 2;
-			setChanged();
-			notifyObservers();
+			changedScore();
 		}
 	}
 
-	public void calculateGrade() {
-		new Thread() {
-			public void run() {
-				addScore();
-				subScore();
-				setChanged();
-				notifyObservers();
-			};
-		}.start();
-	}
+//	public void calculateGrade() {
+//		new Thread() {
+//			public void run() {
+//				addScore();
+//				subScore();
+//				changedScore();
+//			};
+//		}.start();
+//	}
 }

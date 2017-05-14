@@ -1,14 +1,19 @@
 package project;
 
+import java.util.Observable;
+
 public class Star extends Item{
-	Score txtScore;
-public Star(int x, int y, int len, Player player,Score txtScore) {
-	super(y, y, len, player);
-	touchBehavior= new TouchAddGrade(txtScore);
+	Observable txtScore;
+	ViewScore viewScore;
+public Star(int x, int y, int len, Player player,Score txtScore,ViewScore viewScore) {
+	super(y, y, len, player, txtScore);
+	touchBehavior= new TouchAddGrade(txtScore,viewScore);
 	this.x = x;
 	this.y = y;
 	this.len = len;
+	txtScore = new Score();
 	this.txtScore = txtScore;
+	txtScore.addObserver(this);
 }
 public int getX() {
 	return x;
@@ -21,5 +26,20 @@ public int getY() {
 }
 public void setY(int y) {
 	this.y = y;
+}
+@Override
+public void update(Observable o, Object arg) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void runEnemy() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void setState(boolean state) {
+	// TODO Auto-generated method stub
+	
 }
 }

@@ -17,17 +17,26 @@ public class ViewScore extends JTextField implements Observer{
 	FontMetrics fm;
 	public ViewScore(Observable observable) {
 		grade =0;
+		this.observable = observable;
 		observable = new Score();
 		observable.addObserver(this); 
-		((Score)observable).addScore();
-		((Score)observable).subScore();
+//		((Score)observable).addScore();
+//		((Score)observable).subScore();
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof Clock){
+		if(o instanceof Score){
 			Score score = (Score)o;
 			this.grade=score.getScore();
+			System.out.println(grade);
+			repaint();
 		}
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -38,6 +47,7 @@ public class ViewScore extends JTextField implements Observer{
 		
 		g.setColor(myColor);
 		g.drawString("Score : ",hourXCoordinate, 20);
+		
 		g.drawString(" "+grade, minuteXCoordinate, 20);
 	}
 }

@@ -1,13 +1,20 @@
 package project;
 
-public abstract class Item implements InterfaceItem{
+import java.util.Observable;
+import java.util.Observer;
+
+public abstract class Item implements InterfaceItem, Observer{
 	protected int x;
 	protected int y;
 	protected int len;
 	protected Player player;
 	protected TouchBehavior touchBehavior;
-	public Item(int x, int y,int len, Player player) {
+	Observable score;
+	public Item(int x, int y,int len, Player player,Observable score) {
 		super();
+		this.score = score;
+		score = new Score();
+		score.addObserver(this);
 		this.x = x;
 		this.y = y;
 		this.player = player;

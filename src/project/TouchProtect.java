@@ -1,10 +1,13 @@
 package project;
 
 public class TouchProtect implements TouchBehavior{
-//Star star;
+	private Score txtScore;
+	public TouchProtect(Score txtScore) {
+		this.txtScore = txtScore;
+	}
 	@Override
 	public void touched() {
-		//star.performTouch();
+		System.out.println("protect");
 	}
 
 }

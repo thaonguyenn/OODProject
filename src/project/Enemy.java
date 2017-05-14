@@ -10,16 +10,19 @@ public class Enemy extends Item implements Observer {
 	private int w;
 	private boolean state, running;
 	Observable observable;
-	Score txtScore;
-	public Enemy(Observable observable, int x, int y, int len, Player player, int dx, int dy, int h, int w,Score txtScore, boolean state) {
-		super(x, y, len, player);
+	Observable txtScore;
+	ViewScore score;
+	public Enemy(Observable observable, int x, int y, int len, Player player, int dx, int dy, int h, int w,Observable txtScore, boolean state,ViewScore score) {
+		super(x, y, len, player, txtScore);
 		this.observable = observable;
 		observable = new Clock();
+		this.score = score;
 		if(state==true)
-		touchBehavior = new TouchSubGrade(txtScore);
-		else
-		touchBehavior = new TouchAddDoubleGrade(txtScore);
+		touchBehavior = new TouchSubGrade((Score)txtScore,score);
+		if(state==false)
+		touchBehavior = new TouchAddDoubleGrade((Score)txtScore,score);
 		this.txtScore = txtScore;
+		txtScore = new Score();
 		this.x = x;
 		this.y = y;
 		this.len = len;
@@ -30,6 +33,7 @@ public class Enemy extends Item implements Observer {
 		this.state = state;
 		running = true;
 		observable.addObserver(this);
+		txtScore.addObserver(this);
 		((Clock)observable).demNguoc(50);
 	}
 
