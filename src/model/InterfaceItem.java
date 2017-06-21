@@ -10,4 +10,5 @@ public abstract int getY();
 public abstract int getLen();
 public abstract void runEnemy();
 public abstract void setState(boolean state);
+public abstract boolean isState();
 }

@@ -41,4 +41,10 @@ public class Armor extends Item {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public boolean isState() {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
 	}

@@ -83,13 +83,14 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 
 		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, true,txtScore);
 		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, true,txtScore);
+		
 		st2 = new Star(20, 170, 25, player, grade,txtScore);
 		st3 = new Star(280, 70, 25, player, grade,txtScore);
 		st4 = new Star(470, 185, 25, player, grade,txtScore);
 
 		armor = new Armor(400, 250, 30, player, (Star) st2,grade);
 
-		controller = (InterfaceControllerBackground) new ControllerBackgrond1(player,listEnemies, listStars, armor);
+		controller = new ControllerBackgrond1(player,listEnemies, listStars, armor);
 		controller.addEnemy(enemy1);
 		controller.addEnemy(enemy2);
 		controller.addStar(st2);
@@ -229,6 +230,7 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		while (true) {// && txtClock.state
 			enemy1.runEnemy();
 			enemy2.runEnemy();
+			System.out.println(enemy1.isState());
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {

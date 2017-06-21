@@ -21,9 +21,10 @@ public class Enemy extends Item implements Observer {
 		this.observable = observable;
 		observable = new Clock();
 		this.score = score;
+		this.state = state;
 		if(state==true)
 		touchBehavior = new TouchSubGrade((Score)txtScore,score);
-		if(state==false)
+		else
 		touchBehavior = new TouchAddDoubleGrade((Score)txtScore,score);
 		this.txtScore = txtScore;
 		txtScore = new Score();

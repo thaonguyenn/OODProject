@@ -45,4 +45,9 @@ public void setState(boolean state) {
 	// TODO Auto-generated method stub
 	
 }
+@Override
+public boolean isState() {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

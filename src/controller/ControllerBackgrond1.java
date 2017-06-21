@@ -1,11 +1,11 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.InterfaceControllerBackground;
 import model.InterfaceItem;
 import model.Player;
+import model.PlayerNormal;
 import model.PlayerProtected;
 
 public class ControllerBackgrond1 implements InterfaceControllerBackground{
@@ -18,8 +18,6 @@ public ControllerBackgrond1(Player player,List<InterfaceItem> listEnemies, List<
 	this.player = player;
 	this.listEnemies = listEnemies;
 	this.listStars = listStars;
-	listEnemies = new ArrayList<InterfaceItem>();
-	listStars = new ArrayList<InterfaceItem>();
 	this.armor = armor;
 }
 public void addEnemy(InterfaceItem enemy){
@@ -46,8 +44,9 @@ public void checkStars(){
 	}
 }
 public void checkArmor(){
-		if(armor.touch()){
-			player = new PlayerProtected(100, player.getY(), player.getDuongKinh(), player);
+	if(armor.touch()){
+			Player tmp = player;
+			player = new PlayerProtected(100, tmp.getY(), tmp.getDuongKinh(), tmp);
 			armor.performTouch();
 			armor.setX(900);
 			armor.setY(900);
