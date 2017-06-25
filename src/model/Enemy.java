@@ -16,18 +16,20 @@ public class Enemy extends Item implements Observer {
 	Observable observable;
 	Observable txtScore;
 	ViewScore score;
-	public Enemy(Observable observable, int x, int y, int len, Player player, int dx, int dy, int h, int w,Observable txtScore, boolean state,ViewScore score) {
+	public Enemy(Observable observable, int x, int y, int len, Player player, int dx, int dy, int h, int w,Observable txtScore,ViewScore score) {
 		super(x, y, len, player, txtScore);
 		this.observable = observable;
 		observable = new Clock();
 		this.score = score;
-		this.state = state;
+		state= true;
+		
 		if(state==true)
 		touchBehavior = new TouchSubGrade((Score)txtScore,score);
 		else
 		touchBehavior = new TouchAddDoubleGrade((Score)txtScore,score);
+		
 		this.txtScore = txtScore;
-		txtScore = new Score();
+		//txtScore = new Score();
 		this.x = x;
 		this.y = y;
 		this.len = len;
@@ -35,7 +37,6 @@ public class Enemy extends Item implements Observer {
 		this.dy = dy;
 		this.h = h;
 		this.w = w;
-		this.state = state;
 		running = true;
 		observable.addObserver(this);
 		txtScore.addObserver(this);
@@ -102,5 +103,11 @@ public class Enemy extends Item implements Observer {
 				}
 			}
 		}
+//		if(o instanceof Score){
+//			if(state==false){
+//				txtScore.notifyObservers("state");
+//				//txtScore.notify();
+//			}
+//		}
 	}
 }

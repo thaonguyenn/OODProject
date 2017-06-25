@@ -10,41 +10,47 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import controller.ControllerBackgrond1;
+import controller.TouchAddDoubleGrade;
 import model.Armor;
 import model.Bar;
 import model.Clock;
 import model.Enemy;
 import model.InterfaceBar;
-import model.InterfaceControllerBackground;
-import model.InterfaceItem;
 import model.Player;
 import model.PlayerNormal;
+import model.PlayerProtected;
 import model.Score;
 import model.Star;
 
 public class BackgroundLevel1 extends JFrame implements Runnable {
 	private Player player;
-	private InterfaceItem enemy1, enemy2;
+	private Enemy enemy1, enemy2;
 	private InterfaceBar bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10;
-	private InterfaceItem st2, st3, st4, armor;
+	private Star st2, st3, st4;
+	private int s2, s3, s4;
+	private Armor armor;
 	private List<InterfaceBar> bars;
-	private List<InterfaceItem> listEnemies;
-	private List<InterfaceItem> listStars;
+	private List<Enemy> listEnemies;
+	private List<Star> listStars;
 	private ViewClock txtClock;
 	private ViewScore txtScore;
 	private Clock clock;
 	private Score grade;
-	private InterfaceControllerBackground controller;
+	private ControllerBackgrond1 controller;
 	Thread t;
 	int key;
 	int score = 0;
 
 	public BackgroundLevel1() {
 		setLayout(null);
-		listEnemies = new ArrayList<InterfaceItem>();
-		listStars = new ArrayList<InterfaceItem>();
+		s2 = 0;
+		s3 = 0;
+		s4 = 0;
+		listEnemies = new ArrayList<Enemy>();
+		listStars = new ArrayList<Star>();
 		clock = new Clock();
 		grade = new Score();
 		t = new Thread(this);
@@ -81,16 +87,16 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		bars.add(bar9);
 		bars.add(bar10);
 
-		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, true,txtScore);
-		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, true,txtScore);
-		
-		st2 = new Star(20, 170, 25, player, grade,txtScore);
-		st3 = new Star(280, 70, 25, player, grade,txtScore);
-		st4 = new Star(470, 185, 25, player, grade,txtScore);
+		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
 
-		armor = new Armor(400, 250, 30, player, (Star) st2,grade);
+		st2 = new Star(20, 170, 25, player, grade, txtScore);
+		st3 = new Star(280, 70, 25, player, grade, txtScore);
+		st4 = new Star(470, 185, 25, player, grade, txtScore);
 
-		controller = new ControllerBackgrond1(player,listEnemies, listStars, armor);
+		armor = new Armor(400, 250, 30, player, grade);
+
+		controller = new ControllerBackgrond1(player, listEnemies, listStars, armor, grade, txtScore);
 		controller.addEnemy(enemy1);
 		controller.addEnemy(enemy2);
 		controller.addStar(st2);
@@ -175,23 +181,184 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 					return;
 				switch (key) {
 				case KeyEvent.VK_RIGHT:
+
 					player.moveRight();
-					controller.checkAll();
+					if (enemy1.touch()) {
+						if (enemy1.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy1.performTouch();
+							enemy1.setX(1200);
+							enemy1.setY(1250);
+						} else
+							enemy1.performTouch();
+					}
+					if (enemy2.touch()) {
+						if (enemy2.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy2.performTouch();
+							enemy2.setX(1100);
+							enemy2.setY(1150);
+						} else
+							enemy2.performTouch();
+					}
+					if (st2.touch()) {
+						s2++;
+						st2.performTouch();
+						st2.setX(1000);
+						st2.setY(1050);
+					}
+					if (st3.touch()) {
+						s3++;
+						st3.performTouch();
+						st3.setX(700);
+						st3.setY(750);
+					}
+					if (st4.touch()) {
+						s4++;
+						st4.performTouch();
+						st4.setX(900);
+						st4.setY(950);
+					}
+					if (armor.touch()) {
+						Player tmp = player;
+						player = new PlayerProtected(tmp.getX(), tmp.getY(), tmp.getDuongKinh(), tmp);
+						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
+						if (s2 == 0)
+							st2 = new Star(20, 170, 25, player, grade, txtScore);
+						if (s3 == 0)
+							st3 = new Star(280, 70, 25, player, grade, txtScore);
+						if (s4 == 0)
+							st4 = new Star(470, 185, 25, player, grade, txtScore);
+						armor.performTouch();
+						armor.setX(800);
+						armor.setY(850);
+						enemy1.setState(false);
+						enemy2.setState(false);
+						enemy1.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+						enemy2.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+					}
+
 					repaint();
 					break;
 				case KeyEvent.VK_LEFT:
 					player.moveLeft();
-					controller.checkAll();
+					if (enemy1.touch()) {
+						if (enemy1.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy1.performTouch();
+							enemy1.setX(1200);
+							enemy1.setY(1250);
+						} else
+							enemy1.performTouch();
+					}
+					if (enemy2.touch()) {
+						if (enemy2.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy2.performTouch();
+							enemy2.setX(1100);
+							enemy2.setY(1150);
+						} else
+							enemy2.performTouch();
+					}
+					if (st2.touch()) {
+						s2++;
+						st2.performTouch();
+						st2.setX(1000);
+						st2.setY(1050);
+					}
+					if (st3.touch()) {
+						s3++;
+						st3.performTouch();
+						st3.setX(700);
+						st3.setY(750);
+					}
+					if (st4.touch()) {
+						s4++;
+						st4.performTouch();
+						st4.setX(900);
+						st4.setY(950);
+					}
+					if (armor.touch()) {
+						Player tmp = player;
+						player = new PlayerProtected(tmp.getX(), tmp.getY(), tmp.getDuongKinh(), tmp);
+						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
+						if (s2 == 0)
+							st2 = new Star(20, 170, 25, player, grade, txtScore);
+						if (s3 == 0)
+							st3 = new Star(280, 70, 25, player, grade, txtScore);
+						if (s4 == 0)
+							st4 = new Star(470, 185, 25, player, grade, txtScore);
+						armor.performTouch();
+						armor.setX(800);
+						armor.setY(850);
+						enemy1.setState(false);
+						enemy2.setState(false);
+						enemy1.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+						enemy2.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+					}
 					repaint();
 					break;
 				case KeyEvent.VK_UP:
 					player.jump();
-					controller.checkAll();
+					if (enemy1.touch()) {
+						if (enemy1.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy1.performTouch();
+							enemy1.setX(1100);
+							enemy1.setY(1150);
+						} else
+							enemy1.performTouch();
+
+					}
+					if (enemy2.touch()) {
+						if (enemy2.getTouchBehavior() instanceof TouchAddDoubleGrade) {
+							enemy2.performTouch();
+							enemy2.setX(1200);
+							enemy2.setY(1250);
+						} else
+							enemy2.performTouch();
+					}
+					if (st2.touch()) {
+						s2++;
+						st2.performTouch();
+						st2.setX(1000);
+						st2.setY(1050);
+					}
+					if (st3.touch()) {
+						s3++;
+						st3.performTouch();
+						st3.setX(700);
+						st3.setY(750);
+					}
+					if (st4.touch()) {
+						s4++;
+						st4.performTouch();
+						st4.setX(900);
+						st4.setY(950);
+					}
+					if (armor.touch()) {
+						Player tmp = player;
+						player = new PlayerProtected(tmp.getX(), tmp.getY(), tmp.getDuongKinh(), tmp);
+						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
+						if (s2 == 0)
+							st2 = new Star(20, 170, 25, player, grade, txtScore);
+						if (s3 == 0)
+							st3 = new Star(280, 70, 25, player, grade, txtScore);
+						if (s4 == 0)
+							st4 = new Star(470, 185, 25, player, grade, txtScore);
+						armor.performTouch();
+						armor.setX(800);
+						armor.setY(850);
+						enemy1.setState(false);
+						enemy2.setState(false);
+						enemy1.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+						enemy2.setTouchBehavior(new TouchAddDoubleGrade((Score) grade, txtScore));
+					}
 					repaint();
 					break;
 				}
 			}
 		});
+		// win before time out
+
 		t.start();
 	}
 
@@ -230,7 +397,45 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		while (true) {// && txtClock.state
 			enemy1.runEnemy();
 			enemy2.runEnemy();
-			System.out.println(enemy1.isState());
+			if (enemy1.getX() > 600 && enemy2.getX() > 600 && st2.getX() > 600 && st3.getX() > 600
+					&& st4.getX() > 600) {
+				if (grade.getScore() == 3) {
+					int option = JOptionPane.showConfirmDialog(null, "Well done !You are winner !Go to level 2 ?", "",
+							JOptionPane.YES_NO_OPTION);
+					if (option == JOptionPane.YES_OPTION) {
+						System.out.println("level2");
+					}
+					if (option == JOptionPane.NO_OPTION) {
+						this.setVisible(false);
+						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
+						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st3 = new Star(280, 70, 25, player, grade, txtScore);
+						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						new TestCase().main(null);
+					}
+					// JOptionPane.showMessageDialog(null, "Well done !You are
+					// winner ! ");
+				} else if (grade.getScore() > 3) {
+					int option = JOptionPane.showConfirmDialog(null, "Great !You are winner !Go to level 2 ?", "",
+							JOptionPane.YES_NO_OPTION);
+					if (option == JOptionPane.YES_OPTION) {
+						System.out.println("level2");
+					}
+					if (option == JOptionPane.NO_OPTION) {
+						this.setVisible(false);
+						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
+						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
+						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st3 = new Star(280, 70, 25, player, grade, txtScore);
+						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						new TestCase().main(null);
+					}
+					// JOptionPane.showMessageDialog(null, "Great !You are
+					// winner ! ");
+				} else
+					JOptionPane.showMessageDialog(null, "Oh oh !You lost ! Play again and try better ...");
+			}
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {

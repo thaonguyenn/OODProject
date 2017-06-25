@@ -15,8 +15,7 @@ public class TouchAddDoubleGrade implements TouchBehavior{
 	@Override
 	public void touched() {
 		txtScore.setCondition(true);
-		txtScore.addScore();
-		txtScore.addScore();
+		txtScore.addDoubleScore();
 		viewScore.setGrade(viewScore.getGrade()+2);
 		txtScore.setCondition(false);
 		System.out.println("add double");

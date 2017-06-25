@@ -1,40 +1,48 @@
 package controller;
 
 import java.util.List;
+import java.util.Observable;
 
-import model.InterfaceControllerBackground;
-import model.InterfaceItem;
+import model.Armor;
+import model.Enemy;
 import model.Player;
-import model.PlayerNormal;
 import model.PlayerProtected;
+import model.Score;
+import model.Star;
+import view.ViewScore;
 
-public class ControllerBackgrond1 implements InterfaceControllerBackground{
+public class ControllerBackgrond1{
 private Player player;
-private List<InterfaceItem> listEnemies;
-private List<InterfaceItem> listStars;
-private InterfaceItem armor;
-public ControllerBackgrond1(Player player,List<InterfaceItem> listEnemies, List<InterfaceItem> listStars, InterfaceItem armor) {
+private List<Enemy> listEnemies;
+private List<Star> listStars;
+private Armor armor;
+Observable txtScore;
+ViewScore score;
+public ControllerBackgrond1(Player player,List<Enemy> listEnemies, List<Star> listStars, Armor armor,Observable txtScore,ViewScore score) {
 	super();
+	this.txtScore = txtScore;
+	this.score = score;
+	score = new ViewScore(txtScore);
 	this.player = player;
 	this.listEnemies = listEnemies;
 	this.listStars = listStars;
 	this.armor = armor;
 }
-public void addEnemy(InterfaceItem enemy){
+public void addEnemy(Enemy enemy){
 	listEnemies.add(enemy);
 }
-public void addStar(InterfaceItem star){
+public void addStar(Star star){
 	listStars.add(star);
 }
 public void checkEnemies(){
-	for (InterfaceItem enemy : listEnemies) {
+	for (Enemy enemy : listEnemies) {
 		if(enemy.touch()){
 			enemy.performTouch();
 			break;}
 	}
 }
 public void checkStars(){
-	for (InterfaceItem star : listStars) {
+	for (Star star : listStars) {
 		if(star.touch()){
 			star.performTouch();
 			star.setX(900);
@@ -50,7 +58,7 @@ public void checkArmor(){
 			armor.performTouch();
 			armor.setX(900);
 			armor.setY(900);
-			for (InterfaceItem enemy : listEnemies) {
+			for (Enemy enemy : listEnemies) {
 				enemy.setState(false);
 			}
 	}

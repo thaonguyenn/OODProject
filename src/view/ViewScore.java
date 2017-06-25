@@ -20,7 +20,6 @@ public class ViewScore extends JTextField implements Observer{
 	public ViewScore(Observable observable) {
 		grade =0;
 		this.observable = observable;
-		observable = new Score();
 		observable.addObserver(this); 
 //		((Score)observable).addScore();
 //		((Score)observable).subScore();
@@ -28,9 +27,13 @@ public class ViewScore extends JTextField implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof Score){
+//			if (arg instanceof String) {
+//				if ("state".equals(arg)) {
+//					
+//				}
+//			}
 			Score score = (Score)o;
 			this.grade=score.getScore();
-			System.out.println(grade);
 			repaint();
 		}
 	}

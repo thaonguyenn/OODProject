@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import model.BackgroundLevel1Open;
+import model.LevelOpen;
 import model.HelpOpen;
 import model.InterfaceMenu;
 import model.Menu;
@@ -25,7 +25,8 @@ public class Beginer extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!btStart.isSelected()) {
-					menu.getMenu1().execute();
+					menu.getMenu()[0].execute();
+					setVisible(false);
 				}
 			}
 		});
@@ -37,7 +38,8 @@ public class Beginer extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!btHelp.isSelected()) {
-					menu.getMenu2().execute();
+					menu.getMenu()[1].execute();
+					setVisible(false);
 				}
 			}
 		});
@@ -54,16 +56,9 @@ public class Beginer extends JFrame {
 			}
 		});
 
-		setVisible(true);
+		setVisible(false);
 		setSize(400, 400);
 		setLocationRelativeTo(null);
 	}
-	public static void main(String[] args) {
-		BackgroundLevel1 level1 = new BackgroundLevel1();
-		Help help = new Help();
-		InterfaceMenu bOpen = new BackgroundLevel1Open(level1);
-		InterfaceMenu hOpen = new HelpOpen(help);
-		Menu menu = new Menu(bOpen, hOpen);
-		Beginer beginer = new Beginer(menu);
-	}
+	
 }

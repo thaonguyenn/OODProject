@@ -5,7 +5,7 @@ import java.util.Observable;
 import controller.TouchProtect;
 
 public class Armor extends Item {
-	public Armor(int x, int y, int len, Player player,Star star,Observable score) {
+	public Armor(int x, int y, int len, Player player,Observable score) {
 		super(y, y, len, player, score);
 		touchBehavior= new TouchProtect((Score)score);
 		score = new Score();
@@ -28,22 +28,6 @@ public class Armor extends Item {
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void runEnemy() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void setState(boolean state) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public boolean isState() {
-		return false;
 		// TODO Auto-generated method stub
 		
 	}

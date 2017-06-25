@@ -39,12 +39,12 @@ public class Clock extends Observable implements InterfaceClock{
 		notifyObservers("update"); // 0 sẽ là cap nhật time
 	}
 
-	public void setClock(int hour, int minute, int second) {
-		this.hour = hour;
-		this.minute = minute;
-		this.second = second;
-		changedClock();
-	}
+//	public void setClock(int hour, int minute, int second) {
+//		this.hour = hour;
+//		this.minute = minute;
+//		this.second = second;
+//		changedClock();
+//	}
 	public void demNguoc( int second){// cung cap ra 1 ham dem nguoc cho swing xai
 		this.second = second; // giay thui cho it
 		new Thread(){

@@ -50,6 +50,12 @@ public class Score extends Observable implements InterfaceScore {
 			changedScore();
 		}
 	}
+	public void addDoubleScore() {
+		if (condition == true) {
+			score += 2;
+			changedScore();
+		}
+	}
 
 //	public void calculateGrade() {
 //		new Thread() {

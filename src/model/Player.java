@@ -3,7 +3,7 @@ package model;
 import java.awt.Color;
 import java.util.List;
 
-public abstract class Player implements Runnable,InterfacePlayer {
+public abstract class Player implements Runnable{
 	protected int x;
 	protected int y;
 	protected int duongKinh;

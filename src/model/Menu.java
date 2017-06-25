@@ -1,23 +1,19 @@
 package model;
 
 public class Menu {
-	private InterfaceMenu menu1;
-	private InterfaceMenu menu2;
-	public Menu(InterfaceMenu menu1, InterfaceMenu menu2) {
-		this.menu1 = menu1;
-		this.menu2 = menu2;
+	private InterfaceMenu[] menu;
+	public Menu() {
+		menu = new InterfaceMenu[2];
+		InterfaceMenu noOpen = new NoOpen();
+		for (int i = 0; i < menu.length; i++) {
+			menu[i]= noOpen;
+		}
 }
-	public InterfaceMenu getMenu1() {
-		return menu1;
+	public void setMenu(int index, InterfaceMenu menu){
+		if(index<this.menu.length)
+		this.menu[index]=menu;
 	}
-	public void setMenu1(InterfaceMenu menu1) {
-		this.menu1 = menu1;
+	public InterfaceMenu[] getMenu(){
+		return this.menu;
 	}
-	public InterfaceMenu getMenu2() {
-		return menu2;
-	}
-	public void setMenu2(InterfaceMenu menu2) {
-		this.menu2 = menu2;
-	}
-	
 }

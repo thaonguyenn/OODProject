@@ -35,19 +35,5 @@ public void update(Observable o, Object arg) {
 	// TODO Auto-generated method stub
 	
 }
-@Override
-public void runEnemy() {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public void setState(boolean state) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean isState() {
-	// TODO Auto-generated method stub
-	return false;
-}
+
 }

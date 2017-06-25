@@ -3,7 +3,7 @@ package model;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class Item implements InterfaceItem, Observer{
+public abstract class Item implements Observer{
 	protected int x;
 	protected int y;
 	protected int len;
@@ -13,12 +13,19 @@ public abstract class Item implements InterfaceItem, Observer{
 	public Item(int x, int y,int len, Player player,Observable score) {
 		super();
 		this.score = score;
-		score = new Score();
 		score.addObserver(this);
 		this.x = x;
 		this.y = y;
 		this.player = player;
 	}
+	public TouchBehavior getTouchBehavior() {
+		return touchBehavior;
+	}
+
+	public void setTouchBehavior(TouchBehavior touchBehavior) {
+		this.touchBehavior = touchBehavior;
+	}
+
 	public void performTouch (){
 		touchBehavior.touched();
 	}
