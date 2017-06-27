@@ -31,4 +31,11 @@ public class Armor extends Item {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public boolean touch() {
+		return player.getX()>=this.x && player.getX()<=this.x+len
+				&& player.getY()>=this.y && player.getY()<=this.y+len
+				|| player.getX()+player.getDuongKinh()>=this.x && player.getX()+player.getDuongKinh()<=this.x+len
+				&& player.getY()+player.getDuongKinh()>=this.y && player.getY()+player.getDuongKinh()<=this.y+len;
+	}
 	}

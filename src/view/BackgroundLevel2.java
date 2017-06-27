@@ -24,7 +24,7 @@ import model.ProtectedPlayer;
 import model.Score;
 import model.Star;
 
-public class BackgroundLevel1 extends JFrame implements Runnable {
+class BackgroundLevel2 extends JFrame implements Runnable {
 	private Player player;
 	private Enemy enemy1, enemy2;
 	private InterfaceBar bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10;
@@ -40,7 +40,7 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 	int key;
 	int score = 0;
 
-	public BackgroundLevel1() {
+	public BackgroundLevel2() {
 		setLayout(null);
 		s2 = 0;
 		s3 = 0;
@@ -70,7 +70,6 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		bar9 = new Bar(60, 70, 100);
 		bar10 = new Bar(0, 300, 800);
 		bars = new ArrayList<InterfaceBar>();
-		bars.add(bar1);
 		bars.add(bar2);
 		bars.add(bar3);
 		bars.add(bar4);
@@ -84,12 +83,12 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 		enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
 
-		st2 = new Star(20, 170, 25, player, grade, txtScore);
+		st2 = new Star(350, 155, 25, player, grade, txtScore);
 		st3 = new Star(280, 70, 25, player, grade, txtScore);
-		st4 = new Star(470, 185, 25, player, grade, txtScore);
+		st4 = new Star(300, 250, 25, player, grade, txtScore);
 
-		armor = new Armor(400, 250, 30, player, grade);
-		
+		armor = new Armor(450, 100, 30, player, grade);
+
 		JLabel lbl2 = new JLabel(new ImageIcon("image/b1.png"));
 		lbl2.setBounds(bar1.getX(), bar1.getY() - 90, bar1.getX() + bar1.getLen(), bar1.getY());
 		add(lbl2);
@@ -114,9 +113,6 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		JLabel lbl3 = new JLabel(new ImageIcon("image/b2.png"));
 		lbl3.setBounds(bar2.getX() - 50, bar2.getY() - 130, bar2.getX() + bar2.getLen(), bar2.getY());
 		add(lbl3);
-		JLabel lbl3t = new JLabel(new ImageIcon("image/b2.png"));
-		lbl3t.setBounds(bar2.getX() - 120, bar2.getY() - 90, bar2.getX() + bar2.getLen(), bar2.getY());
-		add(lbl3t);
 		JLabel lbl4 = new JLabel(new ImageIcon("image/b2.png"));
 		lbl4.setBounds(bar3.getX() - 75, bar3.getY() - 130, bar3.getX() + bar3.getLen(), bar3.getY());
 		add(lbl4);
@@ -138,7 +134,7 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		JLabel lbl11 = new JLabel(new ImageIcon("image/b2.png"));
 		lbl11.setBounds(bar10.getX() - 55, bar10.getY() - 280, bar10.getX() + bar10.getLen(), bar10.getY());
 		add(lbl11);
-		JLabel lbl1 = new JLabel(new ImageIcon("image/background.png"));
+		JLabel lbl1 = new JLabel(new ImageIcon("image/sea4.jpg"));
 		lbl1.setBounds(0, 0, 600, 350);
 		add(lbl1);
 
@@ -211,11 +207,11 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
 						if (s2 == 0)
-							st2 = new Star(20, 170, 25, player, grade, txtScore);
+							st2 = new Star(350, 155, 25, player, grade, txtScore);
 						if (s3 == 0)
 							st3 = new Star(280, 70, 25, player, grade, txtScore);
 						if (s4 == 0)
-							st4 = new Star(470, 185, 25, player, grade, txtScore);
+							st4 = new Star(300, 250, 25, player, grade, txtScore);
 						armor.performTouch();
 						armor.setX(800);
 						armor.setY(850);
@@ -269,11 +265,11 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
 						if (s2 == 0)
-							st2 = new Star(20, 170, 25, player, grade, txtScore);
+							st2 = new Star(350, 155, 25, player, grade, txtScore);
 						if (s3 == 0)
 							st3 = new Star(280, 70, 25, player, grade, txtScore);
 						if (s4 == 0)
-							st4 = new Star(470, 185, 25, player, grade, txtScore);
+							st4 = new Star(300, 250, 25, player, grade, txtScore);
 						armor.performTouch();
 						armor.setX(800);
 						armor.setY(850);
@@ -327,11 +323,11 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
 						if (s2 == 0)
-							st2 = new Star(20, 170, 25, player, grade, txtScore);
+							st2 = new Star(350, 155, 25, player, grade, txtScore);
 						if (s3 == 0)
 							st3 = new Star(280, 70, 25, player, grade, txtScore);
 						if (s4 == 0)
-							st4 = new Star(470, 185, 25, player, grade, txtScore);
+							st4 = new Star(300, 250, 25, player, grade, txtScore);
 						armor.performTouch();
 						armor.setX(800);
 						armor.setY(850);
@@ -345,17 +341,20 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 				}
 			}
 		});
-		
+
 		t.start();
 	}
 
 	public void start() {
 		this.setVisible(true);
+		// new Thread(player).start();
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		// System.out.println(player.getX() + "-" + player.getY()+ "-"
+		// +player.getDuongKinh());
 		g.setColor(player.power());
 		g.fillOval(player.getX(), player.getY(), player.getDuongKinh(), player.getDuongKinh());
 		g.setColor(Color.red);
@@ -367,7 +366,6 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 		g.fillOval(st4.getX(), st4.getY(), st4.getLen(), st4.getLen());
 		g.setColor(Color.blue);
 		g.fillRect(armor.getX(), armor.getY(), armor.getLen(), armor.getLen());
-
 	}
 
 	@Override
@@ -381,74 +379,72 @@ public class BackgroundLevel1 extends JFrame implements Runnable {
 					&& st4.getX() > 600) {
 				clock = new Clock();
 				if (grade.getScore() == 3) {
-					int option = JOptionPane.showConfirmDialog(null, "Well done !You are winner !Go to level 2 ?", "",
-							JOptionPane.YES_NO_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, "Well done !You are winner !", "",
+							JOptionPane.YES_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
-						new BackgroundLevel2().start();	
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
+						new TestCase().main(null);
 					}
 					if (option == JOptionPane.NO_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
 						new TestCase().main(null);
 					}
-					// JOptionPane.showMessageDialog(null, "Well done !You are
-					// winner ! ");
 				} else if (grade.getScore() > 3) {
-					int option = JOptionPane.showConfirmDialog(null, "Great !You are winner !Go to level 2 ?", "",
-							JOptionPane.YES_NO_OPTION);
+					int option = JOptionPane.showConfirmDialog(null, "Great !You are winner !", "",
+							JOptionPane.YES_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
-						new BackgroundLevel2().start();
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
+						new TestCase().main(null);
 					}
 					if (option == JOptionPane.NO_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
 						new TestCase().main(null);
 					}
-					// JOptionPane.showMessageDialog(null, "Great !You are
-					// winner ! ");
-				} else{
+
+				} else {
 					int option = JOptionPane.showConfirmDialog(null, "Oh oh !You lost ! Play again and try better ...",
 							"", JOptionPane.YES_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
 						new TestCase().main(null);
 					}
 					if (option == JOptionPane.NO_OPTION) {
 						this.setVisible(false);
 						enemy1 = new Enemy(clock, 170, 245, 30, player, 3, 3, 200, 100, grade, txtScore);
 						enemy2 = new Enemy(clock, 300, 155, 30, player, 3, 3, 350, 200, grade, txtScore);
-						st2 = new Star(20, 170, 25, player, grade, txtScore);
+						st2 = new Star(350, 155, 25, player, grade, txtScore);
 						st3 = new Star(280, 70, 25, player, grade, txtScore);
-						st4 = new Star(470, 185, 25, player, grade, txtScore);
+						st4 = new Star(300, 250, 25, player, grade, txtScore);
 						new TestCase().main(null);
 					}
 
-				}}
+				}
+			}
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {

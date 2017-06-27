@@ -22,7 +22,6 @@ public abstract class Player implements Runnable{
 		jumping = false;
 		highJump = 100;
 		freeFalling = false;
-//		new Thread(this).start();
 	}
 
 	public abstract Color power();
@@ -84,12 +83,6 @@ public abstract class Player implements Runnable{
 	public void stop() {
 		jumping = false;
 	}
-	/**
-	 * 
-	 * @param lenC, nó là hình tròn mà hả? da, đường kính ak hả, da dung, ai ma viet zị chời?
-	 * hừm hừm.
-	 * @return
-	 */
 	public Point tamPlayer(int lenC) {
 		return new Point(lenC / 2 + this.x, lenC / 2 + this.y);
 	}
@@ -97,15 +90,7 @@ public abstract class Player implements Runnable{
 	public int banKinhPlayer(int lenC) {
 		return lenC / 2;
 	}
-	/**
-	 * mai mot comment zô nha, tháng sau là em quên ak.
-	 * hàm này làm gì?
-	 * Tinh khoang cach tu tam player den duong thang bar
-	 * @param lenC
-	 * @param lenR
-	 * @param bar
-	 * @return
-	 */
+	
 	public double khoangCachTuTamToD(int lenC, int lenR, Point bar) {
 		return Math.abs(lenR * tamPlayer(lenC).getY() - lenR * bar.getY()) / lenR;
 	}
@@ -116,7 +101,7 @@ public abstract class Player implements Runnable{
 	public int getBanKinh(){
 		return this.duongKinh/2;
 	}
-	public void freeFall(List<Bar> bars, int lenght) {
+	public void freeFall(List<InterfaceBar> bars, int lenght) {
 		int tmp =0;
 		for (int i = 0; i < bars.size(); i++) {
 			if (khoangCachTuTamToD(lenght, bars.get(i).getLen(),
@@ -128,31 +113,20 @@ public abstract class Player implements Runnable{
 				tmp++;
 			}
 		}
-		if(tmp==bars.size()) // nay la gi em? da la neu ko co bar nao thoa OK
+		if(tmp==bars.size()) 
 		freeFalling = true;
 	}
 	public void freeFall(List<InterfaceBar> bars) {
-		/*
-		 * neu dang nhay thi khong roi.
-		 */
 		if(jumping){
 			freeFalling = false;
 			return;
 		}
-		
-		/*
-		 * Xac định có bar nào cản đường rời không?
-		 */
-		freeFalling = true; // mặc định là rơi.
+		freeFalling = true;
 		Point tam = getTam();
-		//System.out.println(tam);
 		
 		for (InterfaceBar b : bars) {
 			if(b.isBelow(tam) && b.isBetween(tam)){
-//				System.out.print(b);
-//				System.out.print("  isBelow: " + b.isBelow(tam) + "; isBetween: " + b.isBetween(tam));
-//				System.out.println(";   " + b.distanceTo(tam) + " : " + getBanKinh());
-				if(b.distanceTo(tam) <= getBanKinh()){//khi += or -= khac 5 
+				if(b.distanceTo(tam) <= getBanKinh()){
 					freeFalling = false;
 					break;
 				}
@@ -162,27 +136,15 @@ public abstract class Player implements Runnable{
 	}
 	@Override
 	public void run() {
-		//System.out.println("jumping: " + jumping);
-		
-		/* currentHigh là độ cao hiện tại của player khi đang nhảy.
-		 * thay doi thuat toan ti xíu, khi nó đáng jumping thì currentHigh tăng dần đều
-		 * đến khi bằng highJump thì thôi -> bắt đầu rơi xuống
-		 */
 			if (jumping) {
 				if(currentHigh < highJump){
-					currentHigh += 5; // quản lý độ cao hiện tại đã đạt max chưa?
-					this.y-=5; // tọa độ thực tế khí jump
+					currentHigh += 5;
+					this.y-=5;
 				}else{
 					currentHigh = 0;
 					jumping = false;
 				}
 			}
-			//System.out.println("freeFalling: " + freeFalling);
-			
-			/*
-			 * khi roi thi tăng y như thường. giá trị của freeFalling đc control bới hàm
-			 * freeFall(List<Bar>)
-			 */
 			if (freeFalling) {
 				this.y += 5;
 			}

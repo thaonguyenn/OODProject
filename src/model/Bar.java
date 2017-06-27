@@ -40,7 +40,7 @@ public class Bar implements InterfaceBar{
 		return point.getY() < this.y;
 	}
 
-	public boolean isBetween(Point point) { // ten ham nay chua dung
+	public boolean isBetween(Point point) {
 		return this.x <= point.getX() && point.getX() <= this.x + len;
 	}
 
@@ -48,13 +48,4 @@ public class Bar implements InterfaceBar{
 		return this.y - point.getY();
 	}
 
-//	public boolean notTouch(int a, int b) {
-//		return this.y == b && (a < this.x && a > this.x + 100);
-//	}
-
-//	@Override
-//	public String toString() {
-//		return "Bar [x=" + x + ", y=" + y + ", len=" + len + "]";
-//	}
-	
 }

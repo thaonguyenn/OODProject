@@ -17,14 +17,24 @@ public class ViewClock extends JTextField implements Observer{
 	Observable observable;
 	InterfaceScore score;
 	private int second;
+	int tmp;
 	Font myFont = new Font("Tahoma", Font.BOLD + Font.ITALIC, 20);
 	Color myColor = new Color(255, 0, 0);
 	FontMetrics fm;
 	public ViewClock(Observable observable,InterfaceScore score ) {
+		tmp = 0;
 		observable = new Clock();
 		this.score = score;
-		observable.addObserver(this); // dang ky
-		((Clock)observable).demNguoc(50);// bat dau giam tu 50 -> 0
+		observable.addObserver(this); 
+		((Clock)observable).demNguoc(100);
+	}
+	
+	public int getTmp() {
+		return tmp;
+	}
+
+	public void setTmp(int tmp) {
+		this.tmp = tmp;
 	}
 
 	public void paint(Graphics g) {
@@ -49,6 +59,7 @@ public class ViewClock extends JTextField implements Observer{
 				if("update".equals(arg))
 					repaint();
 				if("end".equals(arg)){
+					System.out.println("nnnnn");
 					if(score.getScore()==3)
 					JOptionPane.showMessageDialog(null, "Well done !You are winner ! ");
 					if(score.getScore()>3)

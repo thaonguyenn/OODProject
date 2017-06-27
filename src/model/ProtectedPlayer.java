@@ -2,9 +2,9 @@ package model;
 
 import java.awt.Color;
 
-public class PlayerProtected extends PlayerDecorator{
+public class ProtectedPlayer extends DecoratorPlayer{
 
-	public PlayerProtected(int x, int y, int duongKinh, Player player) {
+	public ProtectedPlayer(int x, int y, int duongKinh, Player player) {
 		super(x, y, duongKinh,player);
 		
 	}

@@ -2,9 +2,9 @@ package model;
 
 import java.awt.Color;
 
-public class PlayerNormal extends Player{
+public class NormalPlayer extends Player{
 
-	public PlayerNormal(int x, int y, int duongKinh) {
+	public NormalPlayer(int x, int y, int duongKinh) {
 		super(x, y, duongKinh);
 		
 	}

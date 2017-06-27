@@ -13,10 +13,12 @@ public class Level extends JFrame{
 	private JButton btLevel1, btLevel2;
 	private JLabel lblTitle;
 	BackgroundLevel1 level1;
+	BackgroundLevel2 level2;
 	public Level() {
 		setLayout(null);
 		
 		level1 = new BackgroundLevel1();
+		level2 = new BackgroundLevel2();
 		lblTitle = new JLabel("Level");
 		lblTitle.setFont(new Font("Bodoni MT Black", 2, 50));
 		lblTitle.setBounds(240, -40, 150, 150);
@@ -43,7 +45,7 @@ public class Level extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (!btLevel2.isSelected()) {
-					
+					level2.start();
 					setVisible(false);
 				}
 			}

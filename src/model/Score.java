@@ -57,13 +57,4 @@ public class Score extends Observable implements InterfaceScore {
 		}
 	}
 
-//	public void calculateGrade() {
-//		new Thread() {
-//			public void run() {
-//				addScore();
-//				subScore();
-//				changedScore();
-//			};
-//		}.start();
-//	}
 }

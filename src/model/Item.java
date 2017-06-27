@@ -47,11 +47,6 @@ public abstract class Item implements Observer{
 	public void setLen(int len) {
 		this.len = len;
 	}
-	public boolean touch(){
-		return player.getX()>=this.x && player.getX()<=this.x+len
-			&& player.getY()>=this.y && player.getY()<=this.y+len
-			|| player.getX()+player.getDuongKinh()>=this.x && player.getX()+player.getDuongKinh()<=this.x+len
-			&& player.getY()+player.getDuongKinh()>=this.y && player.getY()+player.getDuongKinh()<=this.y+len;
-	}
+	public abstract boolean touch();
 }
 
